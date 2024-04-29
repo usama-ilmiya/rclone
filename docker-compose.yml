@@ -1,0 +1,19 @@
+version: '3'
+
+services:
+  rclone:
+    build:
+      context: .
+    container_name: rclone-container
+    stdin_open: true
+    tty: true
+    ports:
+      - "2222:22"  # Map host port 2222 to container port 22
+    networks:
+      - rclone-network
+    volumes:
+      - ./rclone.conf:/home/ilmAssetManager/.config/rclone/rclone.conf  # Mount your rclone configuration file
+
+networks:
+  rclone-network:
+    driver: bridge
